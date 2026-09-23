@@ -1,7 +1,6 @@
 data/raw
 *.csv
 *.tsv
-*.parquet
 *.pt
 *.pth
 
