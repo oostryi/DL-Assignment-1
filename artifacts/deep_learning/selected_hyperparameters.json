@@ -1,0 +1,8 @@
+{
+  "selection_metric": "ROC-AUC",
+  "best_tuning_roc_auc": 0.7091829778435685,
+  "hidden_dim": 192,
+  "depth": 3,
+  "dropout": 0.2,
+  "learning_rate": 0.0008
+}

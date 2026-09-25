@@ -1,0 +1,11 @@
+{
+  "model": "lightgbm",
+  "folds": 5,
+  "rows_used": 307511,
+  "local_roc_auc": 0.7638387948997303,
+  "local_pr_auc": 0.2473264742423903,
+  "elapsed_minutes": 0.271349999999984,
+  "public_leaderboard_roc_auc": null,
+  "private_leaderboard_roc_auc": null,
+  "notebook_match": true
+}
