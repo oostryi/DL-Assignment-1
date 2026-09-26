@@ -11,6 +11,7 @@ env/
 .uv-cache/
 __pycache__/
 *.pyc
+.pytest_cache/
 
 .ipynb_checkpoints/
 
@@ -19,3 +20,6 @@ __pycache__/
 ._*
 .Trashes
 *~
+
+artifacts/ml_lightgbm_predictions/
+artifacts/tabm_ensemble_predictions/

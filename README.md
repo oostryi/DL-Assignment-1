@@ -142,3 +142,26 @@ folds after 23-33 epochs. Its OOF ROC-AUC was **0.75917** and PR-AUC
 0.23907), while GPU time increased from 22.48 to 37.83 minutes. Keep the
 shorter setting. Details and the reproduction command are in
 `artifacts/transformer_w64_d2_ple_100ep_p15_gpu/EXPERIMENT.md`.
+
+## 4. Ensembling
+
+For the final stage, the LightGBM baseline was combined with the selected TabM dropout-0.2 model. The LightGBM notebook did not save the prediction files needed for ensembling, so `lightgbm_predictions.py` reproduces the same five-fold baseline and exports its out-of-fold and test predictions. `ensemble.py` uses these predictions together with the TabM predictions for the final comparison.
+
+A fresh five-fold rerun of the TabM dropout-0.2 configuration was used for this stage and achieved an OOF ROC-AUC of **0.762322**.
+
+The following methods were tested:
+
+| Model | OOF ROC-AUC |
+|---|---:|
+| LightGBM | 0.763839 |
+| TabM | 0.762322 |
+| 50/50 blend | 0.764681 |
+| Weighted blend (85% LightGBM / 15% TabM) | 0.765903 |
+| **Rank blend** | **0.766048** |
+| Logistic Regression stack | 0.764012 |
+
+The rank blend gave the best local result, so it was selected as the final ensemble. It averages the prediction ranks of LightGBM and TabM instead of their raw probability values.
+
+A two-stage pipeline was also tested using Logistic Regression on the out-of-fold predictions from LightGBM and TabM. It did not improve over the rank blend.
+
+The final rank-blend submission achieved **0.76519 Public ROC-AUC** and **0.76013 Private ROC-AUC** on the Home Credit Default Risk leaderboard. The Public score was close to the local OOF result of 0.766048, while the Private score was lower.
